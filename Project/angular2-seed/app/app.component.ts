@@ -1,24 +1,27 @@
 import {Component} from 'angular2/core';
-import { CoursesComponent } from './courses.component'
-import { AuthorsComponent } from './authors.component'
-import { MyStarComponent } from './mystar.component'
-import { MyHeartComponent } from './myheart.component'
-import { MyVotesComponent } from './myvotes.component'
+import { CoursesComponent } from './courses.component';
+import { AuthorsComponent } from './authors.component';
+import { MyStarComponent } from './/mystar.component';
+import { MyHeartComponent } from './myheart.component';
+import { MyVotesComponent } from './myvotes.component';
+import { TweetComponent } from './tweet.component';
+import { TweetService } from './tweet.service';
 
 @Component({
     selector: 'my-app',
-    template: `
-        <h1>Hello Angular</h1>
-        <courses></courses>
-        <authors></authors>
-        <mystar [isFavorite]="post.isFavorite" (change)="onFavoriteChange($event)"></mystar>
-        <myheart [numberOfLikes]="tweet.totalLikes" [iLiked]="tweet.isLiked" (change)="onLikesChange($event)"></myheart>
-        <myvotes [voteCount]="votes.totalVotes" [myVote]="votes.myVote" (vote)="onVotesChange($event)" ></myvotes>
-        `,
-    directives: [CoursesComponent, AuthorsComponent, MyStarComponent, MyHeartComponent, MyVotesComponent]
+    templateUrl: 'app/app.component.html',
+    directives: [CoursesComponent, AuthorsComponent, MyStarComponent, MyHeartComponent, MyVotesComponent, TweetComponent],
+    providers: [TweetService]
 })
 
 export class AppComponent {
+
+    tweets: any[];
+
+    constructor(tweetService: TweetService) {
+        this.tweets = tweetService.getTweets();
+    }
+
     post = {
         title: "Title",
         isFavorite: true,

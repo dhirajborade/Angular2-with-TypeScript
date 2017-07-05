@@ -1,4 +1,4 @@
-System.register(['angular2/core', './courses.component', './authors.component', './mystar.component', './myheart.component', './myvotes.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './courses.component', './authors.component', './/mystar.component', './myheart.component', './myvotes.component', './tweet.component', './tweet.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './courses.component', './authors.component', 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, courses_component_1, authors_component_1, mystar_component_1, myheart_component_1, myvotes_component_1;
+    var core_1, courses_component_1, authors_component_1, mystar_component_1, myheart_component_1, myvotes_component_1, tweet_component_1, tweet_service_1;
     var AppComponent;
     return {
         setters:[
@@ -31,10 +31,16 @@ System.register(['angular2/core', './courses.component', './authors.component', 
             },
             function (myvotes_component_1_1) {
                 myvotes_component_1 = myvotes_component_1_1;
+            },
+            function (tweet_component_1_1) {
+                tweet_component_1 = tweet_component_1_1;
+            },
+            function (tweet_service_1_1) {
+                tweet_service_1 = tweet_service_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent() {
+                function AppComponent(tweetService) {
                     this.post = {
                         title: "Title",
                         isFavorite: true,
@@ -50,6 +56,7 @@ System.register(['angular2/core', './courses.component', './authors.component', 
                         myVote: 0,
                         totalVotes: 10
                     };
+                    this.tweets = tweetService.getTweets();
                 }
                 AppComponent.prototype.onFavoriteChange = function ($event) {
                     console.log($event);
@@ -63,10 +70,11 @@ System.register(['angular2/core', './courses.component', './authors.component', 
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n        <h1>Hello Angular</h1>\n        <courses></courses>\n        <authors></authors>\n        <mystar [isFavorite]=\"post.isFavorite\" (change)=\"onFavoriteChange($event)\"></mystar>\n        <myheart [numberOfLikes]=\"tweet.totalLikes\" [iLiked]=\"tweet.isLiked\" (change)=\"onLikesChange($event)\"></myheart>\n        <myvotes [voteCount]=\"votes.totalVotes\" [myVote]=\"votes.myVote\" (vote)=\"onVotesChange($event)\" ></myvotes>\n        ",
-                        directives: [courses_component_1.CoursesComponent, authors_component_1.AuthorsComponent, mystar_component_1.MyStarComponent, myheart_component_1.MyHeartComponent, myvotes_component_1.MyVotesComponent]
+                        templateUrl: 'app/app.component.html',
+                        directives: [courses_component_1.CoursesComponent, authors_component_1.AuthorsComponent, mystar_component_1.MyStarComponent, myheart_component_1.MyHeartComponent, myvotes_component_1.MyVotesComponent, tweet_component_1.TweetComponent],
+                        providers: [tweet_service_1.TweetService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [tweet_service_1.TweetService])
                 ], AppComponent);
                 return AppComponent;
             }());
