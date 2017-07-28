@@ -8,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthorsComponent implements OnInit {
 
-  title: string = "Title for the authors page";
+  title = 'Title for the authors page';
   authors: string[];
-  
+
   constructor(authorService: AuthorsService) {
     this.authors = authorService.getAuthors();
   }
